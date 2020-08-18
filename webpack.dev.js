@@ -56,6 +56,16 @@ module.exports = merge(common, {
         test: /\.(woff2?|eot|ttf|otf)$/i,
         loader: "file-loader",
       },
+      {
+        test: /\.jsx?$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
     ],
   },
 });
