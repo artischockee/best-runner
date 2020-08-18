@@ -35,6 +35,9 @@ module.exports = merge(common, {
           },
           {
             loader: "resolve-url-loader",
+            options: {
+              sourceMap: true,
+            },
           },
           {
             loader: "sass-loader",
@@ -43,28 +46,6 @@ module.exports = merge(common, {
             },
           },
         ],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: "file-loader",
-      },
-      {
-        test: /\.svg$/i,
-        loader: "svg-inline-loader",
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)$/i,
-        loader: "file-loader",
-      },
-      {
-        test: /\.[tj]sx?$/i,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
-          },
-        },
       },
     ],
   },
