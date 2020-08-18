@@ -1,10 +1,11 @@
+import './index.scss';
 import React from "react";
 import { render } from "react-dom";
+import Root from "./components/Root";
 
 render(
-  <div>
-    <h1>BestRunner</h1>
-    <p>Demo application</p>
-  </div>,
+  <React.StrictMode>
+    <Root />
+  </React.StrictMode>,
   document.getElementById("root")
 );
