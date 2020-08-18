@@ -24,5 +24,15 @@
   "bugs": {
     "url": "https://github.com/artischockee/best-runner/issues"
   },
-  "homepage": "https://github.com/artischockee/best-runner#readme"
+  "homepage": "https://github.com/artischockee/best-runner#readme",
+  "devDependencies": {
+    "husky": "4.2.5",
+    "lint-staged": "10.2.11",
+    "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
