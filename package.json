@@ -4,6 +4,8 @@
   "private": true,
   "description": "Demo web application for athlete activities tracking",
   "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,9 +28,20 @@
   },
   "homepage": "https://github.com/artischockee/best-runner#readme",
   "devDependencies": {
+    "autoprefixer": "9.8.6",
+    "clean-webpack-plugin": "3.0.0",
+    "html-webpack-plugin": "4.3.0",
     "husky": "4.2.5",
     "lint-staged": "10.2.11",
-    "prettier": "2.0.5"
+    "mini-css-extract-plugin": "0.10.0",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
+    "prettier": "2.0.5",
+    "terser-webpack-plugin": "4.1.0",
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0",
+    "webpack-manifest-plugin": "2.2.0",
+    "webpack-merge": "5.1.2"
   },
   "husky": {
     "hooks": {
