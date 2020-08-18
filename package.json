@@ -1,0 +1,28 @@
+{
+  "name": "best-runner",
+  "version": "0.1.0",
+  "description": "Demo web application for athlete activity tracking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artischockee/best-runner.git"
+  },
+  "keywords": [
+    "best-runner",
+    "best",
+    "runner",
+    "bestrunner",
+    "web",
+    "react",
+    "demo"
+  ],
+  "author": "Artem Piskarev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artischockee/best-runner/issues"
+  },
+  "homepage": "https://github.com/artischockee/best-runner#readme"
+}
