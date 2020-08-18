@@ -1,8 +1,8 @@
 {
   "name": "best-runner",
   "version": "0.1.0",
-  "description": "Demo web application for athlete activity tracking",
-  "main": "index.js",
+  "private": true,
+  "description": "Demo web application for athlete activities tracking",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
