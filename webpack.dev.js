@@ -57,12 +57,12 @@ module.exports = merge(common, {
         loader: "file-loader",
       },
       {
-        test: /\.jsx?$/i,
+        test: /\.[tj]sx?$/i,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
           },
         },
       },

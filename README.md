@@ -12,7 +12,7 @@ BestRunner - demo application for athletes and professional runners. In this app
 
 #### Core techs
 
-- [temporarily] JavaScript (ES6+)
+- TypeScript (v3.9.7)
 - React (v16.13.1)
 
 #### Dev techs

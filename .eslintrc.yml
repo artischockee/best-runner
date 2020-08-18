@@ -3,9 +3,12 @@ env:
   es2020: true
   node: true
 extends:
-  - 'eslint:recommended'
-  - 'prettier'
+  - "eslint:recommended"
+  - "prettier"
+parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: 11
   sourceType: module
+ignorePatterns:
+  - "**/__tests__/*"
 rules: {}
