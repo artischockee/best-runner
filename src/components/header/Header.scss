@@ -1,0 +1,54 @@
+@import "../../scss/variables";
+@import "../../scss/functions";
+@import "../../scss/mixins";
+
+.header {
+  $base_height: 60;
+  $base_v-padding: 10;
+
+  @include section-wrapper;
+
+  max-height: #{$base_height}px;
+
+  &__container {
+    max-width: 1350px;
+    max-height: em($base_height - $base_v-padding * 2);
+    display: flex;
+    padding: #{$base_v-padding}px 48px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-text {
+    display: inline-block;
+    white-space: pre-line;
+    font-size: rem(12);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  &__functional-container {
+    margin-left: auto;
+
+    overflow: hidden; // optional
+  }
+
+  @media only screen and (max-width: 1650px) {
+    &__container {
+      max-width: 1200px;
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    &__container {
+      max-width: 1024px;
+    }
+  }
+}
