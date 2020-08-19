@@ -1,13 +1,13 @@
 import React from "react";
+import { Router } from "react-router-dom";
+import history from "../services/router/history";
+import Routes from "../services/router/config";
+import App from "./app";
 
-interface Props {
-}
-
-export default function Root(props: Props) {
+export default function Root() {
   return (
-    <div>
-      <h1>BestRunner</h1>
-      <p>Demo application</p>
-    </div>
+    <Router history={history}>
+      <App routes={Routes} />
+    </Router>
   );
 }
