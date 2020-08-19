@@ -16,6 +16,8 @@ export default function LayoutBuilder(props: Props) {
     if (componentSettings.usePageWrapper) {
       return <PageWrapper withHeader={componentSettings.useHeader}>{component}</PageWrapper>;
     }
+
+    return component;
   }
 
   // TODO: fallback
