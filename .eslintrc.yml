@@ -6,12 +6,16 @@ extends:
   - "eslint:recommended"
   - "prettier"
   - "plugin:@typescript-eslint/recommended"
+  - "plugin:react/recommended"
 parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: 11
+  ecmaFeatures:
+    jsx: true
   sourceType: module
 plugins:
   - "@typescript-eslint"
 ignorePatterns:
   - "**/__tests__/*"
-rules: {}
+rules:
+  "@typescript-eslint/explicit-module-boundary-types": off
