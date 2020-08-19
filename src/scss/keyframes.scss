@@ -1,0 +1,10 @@
+@import "functions";
+
+@keyframes loader-skeleton-anim {
+  0% {
+    left: em(-150);
+  }
+  100% {
+    left: 100%;
+  }
+}
