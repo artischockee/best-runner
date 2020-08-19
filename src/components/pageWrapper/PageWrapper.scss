@@ -1,0 +1,19 @@
+@import "../../scss/functions";
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-grow: 1;
+
+    &--centered {
+      justify-content: center;
+    }
+  }
+}
