@@ -26,8 +26,8 @@ const Routes: Router.Route[] = [
       isPrivate: false,
     },
     componentSettings: {
-      usePageWrapper: false,
-      useHeader: false,
+      usePageWrapper: true,
+      useHeader: true,
     },
   },
 ];
