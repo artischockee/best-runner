@@ -5,10 +5,13 @@ env:
 extends:
   - "eslint:recommended"
   - "prettier"
+  - "plugin:@typescript-eslint/recommended"
 parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: 11
   sourceType: module
+plugins:
+  - "@typescript-eslint"
 ignorePatterns:
   - "**/__tests__/*"
 rules: {}
