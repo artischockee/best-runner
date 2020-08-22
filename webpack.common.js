@@ -40,7 +40,21 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        loader: "svg-inline-loader",
+        use: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgoConfig: {
+                plugins: {
+                  mergePaths: false,
+                  cleanupIDs: false,
+                  prefixIds: false,
+                },
+              },
+            },
+          },
+          { loader: "file-loader" },
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
