@@ -1,11 +1,6 @@
 @import "functions";
 @import "keyframes";
 
-@mixin section-wrapper {
-  background-color: #fff;
-  box-shadow: em(4) em(4) em(10) rgba(0, 0, 0, 0.05);
-}
-
 @mixin loader-skeleton {
   position: relative;
   overflow: hidden;

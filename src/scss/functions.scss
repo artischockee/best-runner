@@ -1,13 +1,3 @@
-@import "variables";
-
-@function precise_layout($pxDimension, $viewportWidth: 1920) {
-  @return calc(100vw / #{$viewportWidth} * #{$pxDimension});
-}
-
-@function em($pixels, $context: $font_size_default) {
+@function em($pixels, $context: 16) {
   @return #{$pixels/$context}em;
-}
-
-@function rem($pixels, $context: $font_size_default) {
-  @return #{$pixels/$context}rem;
 }
