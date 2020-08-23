@@ -14,6 +14,10 @@ BestRunner - demo application for athletes and professional runners. In this app
 
 - TypeScript (v3.9.7)
 - React (v16.13.1)
+- react-router-dom (v5.2.0)
+- Emotion (v10.0.35)
+- reactstrap (v8.5.1, using Bootstrap v4.5.2)
+- @artischocke/localiser (v2.1.1)
 
 #### Dev techs
 
@@ -21,3 +25,4 @@ BestRunner - demo application for athletes and professional runners. In this app
 - Babel (v7.11.1)
 - Prettier (v2.0.5)
 - ESLint (v7.7.0)
+- Stylelint (v13.6.1)
