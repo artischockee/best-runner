@@ -1,13 +1,7 @@
 const express = require("express");
+const __trainingTypes = require("./dictionaries").trainingTypes;
 
 const router = express.Router();
-
-const __trainingTypes = {
-  running: "running",
-  cycling: "cycling",
-  skiing: "skiing",
-  walking: "walking",
-};
 
 const __records = [
   {
