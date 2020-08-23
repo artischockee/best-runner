@@ -26,73 +26,76 @@ export default function Header() {
       className="sticky-top"
       fluid
     >
-      <Row
-        css={css`
-          margin: 12px 0;
-          justify-content: center;
-        `}
-      >
-        <Col xl={10}>
-          <div
-            css={css`
-              display: flex;
-              align-items: center;
-            `}
-          >
-            <SvgFootwear
+      <Container fluid="md">
+        <Row
+          css={css`
+            margin: 12px 0;
+            justify-content: center;
+          `}
+          noGutters
+        >
+          <Col>
+            <div
               css={css`
-                margin-right: 16px;
-                width: 40px;
-                height: 40px;
-                fill: #484848;
-                transition: fill 150ms ease-out;
-
-                ${[1, 2, 3].map(
-                  (number) =>
-                    css`
-                      #line-${number} {
-                        animation-name: ${logoIconLinesFadeIn};
-                        animation-duration: 750ms;
-                        animation-delay: ${number * 250}ms;
-                        animation-timing-function: ease-out;
-                        animation-fill-mode: both;
-                        fill: ${StyleConstants.colors.accent};
-                        transition: fill 150ms ease;
-                      }
-                    `
-                )}
-
-                :hover {
-                  fill: ${StyleConstants.colors.accent};
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <SvgFootwear
+                css={css`
+                  margin-right: 16px;
+                  width: 40px;
+                  height: 40px;
+                  fill: #484848;
+                  transition: fill 150ms ease-out;
 
                   ${[1, 2, 3].map(
                     (number) =>
                       css`
                         #line-${number} {
-                          fill: #484848;
+                          animation-name: ${logoIconLinesFadeIn};
+                          animation-duration: 750ms;
+                          animation-delay: ${number * 250}ms;
+                          animation-timing-function: ease-out;
+                          animation-fill-mode: both;
+                          fill: ${StyleConstants.colors.accent};
+                          transition: fill 150ms ease;
                         }
                       `
                   )}
-                }
-              `}
-            />
-            <span
-              css={css`
-                display: inline-block;
-                white-space: nowrap;
-                font-size: ${CssUtils.rem(16)};
-                font-weight: 500;
-                line-height: 1;
-                letter-spacing: 0.04em;
-                text-transform: uppercase;
-                color: ${StyleConstants.colors.textW500};
-              `}
-            >
-              {localiser.l("header/title")}
-            </span>
-          </div>
-        </Col>
-      </Row>
+
+                  :hover {
+                    fill: ${StyleConstants.colors.accent};
+
+                    ${[1, 2, 3].map(
+                      (number) =>
+                        css`
+                          #line-${number} {
+                            fill: #484848;
+                          }
+                        `
+                    )}
+                  }
+                `}
+              />
+              <span
+                css={css`
+                  display: inline-block;
+                  white-space: nowrap;
+                  font-size: ${CssUtils.rem(16)};
+                  font-weight: 500;
+                  line-height: 1;
+                  letter-spacing: 0.04em;
+                  text-transform: uppercase;
+                  color: ${StyleConstants.colors.textW500};
+                `}
+              >
+                {localiser.l("header/title")}
+              </span>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 }
