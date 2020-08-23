@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Utils from "./utils";
+import StyleConstants from "../constants/styleConstants";
 
 type Modifiers = string[] | Record<string, unknown>;
 
@@ -55,5 +56,15 @@ export default class CssUtils {
     const baseWithModifiers = this.mergeModifiers(baseClass, modifiers);
 
     return `${baseWithModifiers} ${mixedClass}__${baseClass}`;
+  }
+
+  /**
+   * Calculates rem value based on provided number of pixels and context (default font size by def.)
+   * @param pixels {number}
+   * @param context {number}
+   * @returns {string}
+   */
+  static rem(pixels: number, context = StyleConstants.sizes.defaultFontSize): string {
+    return `${pixels / context}rem`;
   }
 }
