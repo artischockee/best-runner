@@ -33,6 +33,7 @@
     "@babel/preset-env": "7.11.0",
     "@babel/preset-react": "7.10.4",
     "@babel/preset-typescript": "7.10.4",
+    "@emotion/babel-preset-css-prop": "10.0.27",
     "@svgr/webpack": "5.4.0",
     "@types/classnames": "2.2.10",
     "@types/react": "16.9.46",
@@ -47,6 +48,7 @@
     "css-loader": "4.2.1",
     "eslint": "7.7.0",
     "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-emotion": "10.0.27",
     "eslint-plugin-react": "7.20.6",
     "file-loader": "6.0.0",
     "html-webpack-plugin": "4.3.0",
@@ -79,6 +81,7 @@
   },
   "dependencies": {
     "@artischocke/localiser": "2.1.1",
+    "@emotion/core": "10.0.35",
     "bootstrap": "4.5.2",
     "classnames": "2.2.6",
     "history": "5.0.0",
