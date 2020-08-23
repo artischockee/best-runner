@@ -1,4 +1,4 @@
-import "./PageWrapper.scss";
+import { css } from "@emotion/core";
 import React from "react";
 import Header from "../header";
 
@@ -13,9 +13,15 @@ PageWrapper.defaultProps = {
 
 export default function PageWrapper(props: Props) {
   return (
-    <div className="page-wrapper">
+    <div
+      css={css({
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "inherit",
+      })}
+    >
       {props.withHeader && <Header />}
-      <div className="page-wrapper__main">{props.children}</div>
+      {props.children}
     </div>
   );
 }
