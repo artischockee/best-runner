@@ -14,11 +14,12 @@ PageWrapper.defaultProps = {
 export default function PageWrapper(props: Props) {
   return (
     <div
-      css={css({
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "inherit",
-      })}
+      css={css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: inherit;
+      `}
     >
       {props.withHeader && <Header />}
       {props.children}
