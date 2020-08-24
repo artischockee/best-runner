@@ -19,6 +19,7 @@ import TrainingTypesActions from "../../../store/actions/trainingTypesActions";
 import DictionariesUtils from "../../../utils/dictionariesUtils";
 import RecordsActions from "../../../store/actions/recordsActions";
 import { Redux } from "../../../store/types";
+import localiser from "../../../services/locale";
 
 interface Fields {
   trainingDate: string;
@@ -84,7 +85,12 @@ export default function AddRecordForm() {
           </option>
           {trainingTypes.data.map((trainingType) => (
             <option key={trainingType.id} value={trainingType.value}>
-              {DictionariesUtils.getTrainingTypeL10nKey(trainingType.value)}
+              {/* TODO: use stable localiser */}
+              {localiser.ls(
+                DictionariesUtils.getTrainingTypeL10nKey(trainingType.value),
+                null,
+                "en"
+              )}
             </option>
           ))}
         </Input>
