@@ -16,7 +16,7 @@ export default class RecordRowHooks {
       if (typeEntry == null) return null;
 
       return DictionariesUtils.getTrainingTypeL10nKey(typeEntry.value);
-    }, []);
+    }, [trainingTypes]);
 
     return [trainingTypes, getTypeLabelById];
   }

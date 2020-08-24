@@ -12,10 +12,11 @@ interface Props {
   date: string; // ISO format
   type: number;
   mileage: number;
+  onChange(id: number, date: Fields): Promise<() => unknown>;
   onDelete(id: number): void;
 }
 
-interface Fields {
+export interface Fields {
   date: string;
   type: string | number;
   mileage: number;
@@ -28,8 +29,10 @@ export default function RecordRow(props: Props) {
   const [isEditing, setIsEditing] = React.useState(false);
 
   function handleSaveChanges(data: Fields) {
-    console.log("submit changes", data);
-    setIsEditing(false);
+    props.onChange(props.id, data).then((fetchRecords) => {
+      setIsEditing(false);
+      fetchRecords();
+    });
   }
 
   function handleDelete() {
@@ -47,6 +50,7 @@ export default function RecordRow(props: Props) {
             name="date"
             defaultValue={DateUtils.getISODate(props.date) || DateUtils.getTodayDateISO()}
             innerRef={register({ required: true })}
+            invalid={errors.date != null}
           />
         </td>
         <td className="align-middle">
@@ -55,12 +59,13 @@ export default function RecordRow(props: Props) {
             name="type"
             defaultValue={props.type}
             innerRef={register({ required: true })}
+            invalid={errors.type != null}
           >
             <option disabled value="">
               Select an option
             </option>
             {trainingTypes.data.map((trainingType) => (
-              <option key={trainingType.id} value={trainingType.value}>
+              <option key={trainingType.id} value={trainingType.id}>
                 {localiser.ls(
                   DictionariesUtils.getTrainingTypeL10nKey(trainingType.value),
                   null,
@@ -71,7 +76,14 @@ export default function RecordRow(props: Props) {
           </Input>
         </td>
         <td className="align-middle">
-          <Input type="text" value={props.mileage} />
+          <Input
+            type="text"
+            name="mileage"
+            placeholder="5,4"
+            defaultValue={props.mileage}
+            innerRef={register({ required: true, pattern: /^[0-9]+[,.]?[0-9]*$/i, min: 0 })}
+            invalid={errors.mileage != null}
+          />
         </td>
         <td className="align-middle">
           <Button color="link accent" className="mr-1" onClick={handleSubmit(handleSaveChanges)}>
