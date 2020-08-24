@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RecordsSelectors from "../../store/selectors/recordsSelectors";
 import RecordRow from "../../components/recordRow";
 import { Redux } from "../../store/types";
+import { ReactComponent as SVGPlus } from "../../static/images/plus.svg";
 
 export default function IndexPage() {
   const dispatch: Redux.Dispatch = useDispatch();
@@ -38,13 +39,20 @@ export default function IndexPage() {
       `}
       fluid="md"
     >
-      <Row className="justify-content-start">
+      <Row className="justify-content-start mb-4">
         <Col xl={6} lg={6}>
           <Button
             color="primary"
+            className="d-flex align-items-center"
             onClick={() => setIsAddRecordFormCollapseOpen((prevState) => !prevState)}
             style={{ marginBottom: "1rem" }}
           >
+            <SVGPlus
+              css={css`
+                margin-right: .5em;
+                fill: currentColor;
+              `}
+            />
             Add new record
           </Button>
           <Collapse isOpen={isAddRecordFormCollapseOpen}>
