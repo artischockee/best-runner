@@ -10,6 +10,10 @@ export default class Api {
     return http.post("records", data);
   }
 
+  static putRecord(recordId: number, data: Data.RecordPost) {
+    return http.put(`records/${recordId}`, data);
+  }
+
   static deleteRecord(recordId: number) {
     return http.delete(`records/${recordId}`);
   }
