@@ -1,13 +1,16 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { Data } from "../../types/data";
 import { TrainingTypesActionTypes } from "../actions/trainingTypesActions";
+import { Redux } from "../types";
 
-const initialState = {
-  data: [] as Data.TrainingType[],
+const initialState: Redux.GenericReducerState<Data.TrainingType[]> = {
+  data: [],
   isLoading: false,
   isError: false,
   requestedOnce: false,
 };
+
+export type TrainingTypesReducerState = typeof initialState;
 
 const trainingTypesReducer = createReducer(initialState, {
   [TrainingTypesActionTypes.FETCH_PENDING]: (state, action) => ({

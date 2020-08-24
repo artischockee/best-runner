@@ -8,4 +8,11 @@ export declare namespace Redux {
   type Dispatch = typeof store.dispatch;
 
   type ApplicationStore = Store<RootState, AnyAction>;
+
+  interface GenericReducerState<D> {
+    data: D;
+    isLoading: boolean;
+    isError: boolean;
+    requestedOnce?: boolean;
+  }
 }
