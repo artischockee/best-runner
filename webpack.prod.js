@@ -1,3 +1,4 @@
+const path = require("path");
 const { merge } = require("webpack-merge");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -8,6 +9,7 @@ const common = require("./webpack.common");
 module.exports = merge(common, {
   mode: "production",
   output: {
+    path: path.resolve(__dirname, "build"),
     filename: "[name].[contenthash].js",
     chunkFilename: "[name].[contenthash].js",
   },
