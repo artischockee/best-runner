@@ -5,9 +5,11 @@ import AddRecordForm from "../../components/forms/addRecordForm";
 import RecordsActions from "../../store/actions/recordsActions";
 import { useDispatch, useSelector } from "react-redux";
 import RecordsSelectors from "../../store/selectors/recordsSelectors";
+import RecordRow from "../../components/recordRow";
+import { Redux } from "../../store/types";
 
 export default function IndexPage() {
-  const dispatch = useDispatch();
+  const dispatch: Redux.Dispatch = useDispatch();
   const records = useSelector(RecordsSelectors.records);
 
   const [isAddRecordFormCollapseOpen, setIsAddRecordFormCollapseOpen] = React.useState(false);
@@ -19,6 +21,15 @@ export default function IndexPage() {
   React.useEffect(() => {
     getRecords();
   }, [getRecords]);
+
+  function handleDeleteRecord(recordId: number) {
+    dispatch(RecordsActions.deleteRecord(recordId)).then((result) => {
+      if (result.type.endsWith("rejected")) {
+        return window.alert("Error while deleting the record");
+      }
+      dispatch(RecordsActions.fetchRecords());
+    });
+  }
 
   return (
     <Container
@@ -55,16 +66,20 @@ export default function IndexPage() {
                 <th>Date</th>
                 <th>Training type</th>
                 <th>Mileage</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {records.data.map((record, index) => (
-                <tr key={record.id}>
-                  <td>{index + 1}</td>
-                  <td>{new Date(record.date).toLocaleDateString("en-US")}</td>
-                  <td>{record.type}</td>
-                  <td>{record.mileage.toFixed(2)}</td>
-                </tr>
+                <RecordRow
+                  key={record.id}
+                  id={record.id}
+                  index={index + 1}
+                  date={record.date}
+                  type={record.type}
+                  mileage={record.mileage}
+                  onDelete={handleDeleteRecord}
+                />
               ))}
             </tbody>
           </Table>
