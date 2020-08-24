@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../../services/api/api";
+import { Data } from "../../types/data";
 
 const entity = "Records";
 
@@ -21,4 +22,17 @@ export default class RecordsActions {
       thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_FAILURE });
     }
   });
+
+  static createRecord = createAsyncThunk(
+    "records/create",
+    async (data: Data.RecordPost, { rejectWithValue }) => {
+      try {
+        const response = await Api.postRecord(data);
+
+        return response.data;
+      } catch (e) {
+        return rejectWithValue(e.response.data);
+      }
+    }
+  );
 }
