@@ -61,8 +61,40 @@ router.post("/", (req, res) => {
   res.status(201).send(newRecord);
 });
 
-// router.put("/", (req, res) => {
-// });
+router.put("/:recordId", (req, res) => {
+  if (req.params.recordId == null) {
+    return res.status(404).send();
+  }
+
+  let updatedRecord = {};
+
+  try {
+    const recordId = Number(req.params.recordId);
+
+    __records = __records.map((record) => {
+      if (record.id !== recordId) return record;
+
+      const { body } = req;
+
+      updatedRecord = {
+        ...record,
+        date: body.date != null ? new Date(body.date).toISOString() : record.date,
+        type: body.type != null ? Number(body.type) : record.type,
+        mileage:
+          body.mileage != null
+            ? Number(body.mileage.replace(/^(\d+),?(\d*)$/i, "$1.$2"))
+            : record.mileage,
+        comments: body.comments || record.comments,
+      };
+
+      return updatedRecord;
+    });
+  } catch (e) {
+    return res.status(500).send();
+  }
+
+  res.status(200).send(updatedRecord);
+});
 
 router.delete("/:recordId", (req, res) => {
   if (req.params.recordId == null) {
