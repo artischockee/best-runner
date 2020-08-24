@@ -29,8 +29,6 @@ export default function App(props: Props) {
             background-color: ${StyleConstants.colors.accent};
             border-color: ${StyleConstants.colors.accent};
 
-            outline: none;
-
             :hover,
             :focus {
               background-color: ${StyleConstants.colors.accentHover};
@@ -45,6 +43,16 @@ export default function App(props: Props) {
             :not(:disabled):not(.disabled):active:focus,
             :focus {
               box-shadow: 0 0 0 0.2rem ${StyleConstants.colors.accentShadow};
+            }
+          }
+
+          .btn.btn-link {
+            &.accent {
+              color: ${StyleConstants.colors.textDefault};
+            }
+            
+            &.danger {
+              color: ${StyleConstants.colors.danger};
             }
           }
         `}
