@@ -35,4 +35,17 @@ export default class RecordsActions {
       }
     }
   );
+
+  static deleteRecord = createAsyncThunk(
+    "records/delete",
+    async (id: number, { rejectWithValue }) => {
+      try {
+        const response = await Api.deleteRecord(id);
+
+        return response.data;
+      } catch (e) {
+        return rejectWithValue(e.response.data);
+      }
+    }
+  );
 }

@@ -10,6 +10,10 @@ export default class Api {
     return http.post("records", data);
   }
 
+  static deleteRecord(recordId: number) {
+    return http.delete(`records/${recordId}`);
+  }
+
   static getTrainingTypes() {
     return http.get("dictionaries/training-types");
   }
