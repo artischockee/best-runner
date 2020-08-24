@@ -11,27 +11,29 @@ let __records = [
     date: new Date("2020-01-01").toISOString(),
     type: __trainingTypes[0].id,
     mileage: 15.1,
-    comments: "",
+    comments: "I love running! My heart is strong and my muscles are well trained",
   },
   {
     id: 1,
     date: new Date("2020-02-02").toISOString(),
     type: __trainingTypes[1].id,
     mileage: 10.25,
-    comments: "",
+    comments: "Cycling is fun - I can ride a bike all the day long",
   },
   {
     id: 2,
     date: new Date("2020-03-03").toISOString(),
     type: __trainingTypes[2].id,
     mileage: 20.25,
-    comments: "",
+    comments: "When I do skiing, I always take warm clothes and thermos full of hot tea",
   },
   {
     id: 3,
     date: new Date("2020-04-04").toISOString(),
     type: __trainingTypes[3].id,
     mileage: 5,
+    comments:
+      "There is no any thing simpler than walking, which is available for almost every person on the planet",
   },
 ];
 
