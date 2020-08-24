@@ -8,6 +8,7 @@ import RecordsSelectors from "../../store/selectors/recordsSelectors";
 import RecordRow from "../../components/recordRow";
 import { Redux } from "../../store/types";
 import { ReactComponent as SVGPlus } from "../../static/images/plus.svg";
+import { Fields as RecordRowFields } from "../../components/recordRow/RecordRow";
 
 export default function IndexPage() {
   const dispatch: Redux.Dispatch = useDispatch();
@@ -22,6 +23,19 @@ export default function IndexPage() {
   React.useEffect(() => {
     getRecords();
   }, [getRecords]);
+
+  function handleChangeRecord(recordId: number, recordData: RecordRowFields) {
+    return new Promise((resolve, reject) => {
+      dispatch(RecordsActions.editRecord({ recordId, data: recordData })).then((result) => {
+        if (result.type.endsWith("rejected")) {
+          reject();
+          return window.alert("Error while editing the record");
+        }
+
+        resolve(() => dispatch(RecordsActions.fetchRecords()));
+      });
+    });
+  }
 
   function handleDeleteRecord(recordId: number) {
     dispatch(RecordsActions.deleteRecord(recordId)).then((result) => {
@@ -86,6 +100,7 @@ export default function IndexPage() {
                   date={record.date}
                   type={record.type}
                   mileage={record.mileage}
+                  onChange={handleChangeRecord}
                   onDelete={handleDeleteRecord}
                 />
               ))}
