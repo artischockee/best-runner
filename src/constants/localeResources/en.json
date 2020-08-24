@@ -1,3 +1,7 @@
 {
+  "dictionaries/trainingTypes/running": "Running",
+  "dictionaries/trainingTypes/cycling": "Cycling",
+  "dictionaries/trainingTypes/skiing": "Skiing",
+  "dictionaries/trainingTypes/walking": "Walking",
   "header/title": "BestRunner"
 }
