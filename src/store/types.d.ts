@@ -1,13 +1,11 @@
-import { Action, Store, AnyAction } from "redux";
-import { ThunkDispatch as ReduxThunkDispatch } from "redux-thunk";
+import { Store, AnyAction } from "redux";
 import rootReducer from "./reducers/rootReducer";
+import { store } from "../index";
 
 export declare namespace Redux {
   type RootState = ReturnType<typeof rootReducer>;
 
-  type ThunkDispatch = ReduxThunkDispatch<RootState, any, Action>;
-
-  type ThunkGetState = () => RootState;
+  type Dispatch = typeof store.dispatch;
 
   type ApplicationStore = Store<RootState, AnyAction>;
 }
