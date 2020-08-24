@@ -36,6 +36,19 @@ export default class RecordsActions {
     }
   );
 
+  static editRecord = createAsyncThunk(
+    "records/edit",
+    async (payload: { recordId: number; data: Data.RecordPost }, { rejectWithValue }) => {
+      try {
+        const response = await Api.putRecord(payload.recordId, payload.data);
+
+        return response.data;
+      } catch (e) {
+        return rejectWithValue(e.response.data);
+      }
+    }
+  );
+
   static deleteRecord = createAsyncThunk(
     "records/delete",
     async (id: number, { rejectWithValue }) => {
