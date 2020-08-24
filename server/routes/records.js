@@ -5,7 +5,7 @@ const __trainingTypes = require("./dictionaries").trainingTypes;
 
 const router = express.Router();
 
-const __records = [
+let __records = [
   {
     id: 0,
     date: new Date("2020-01-01").toISOString(),
@@ -62,7 +62,18 @@ router.post("/", (req, res) => {
 // router.put("/", (req, res) => {
 // });
 
-// router.delete("/", (req, res) => {
-// });
+router.delete("/:recordId", (req, res) => {
+  if (req.params.recordId == null) {
+    return res.status(404).send();
+  }
+
+  try {
+    __records = __records.filter((record) => record.id !== Number(req.params.recordId));
+  } catch {
+    return res.status(500).send();
+  }
+
+  res.status(204).send();
+});
 
 module.exports = router;
