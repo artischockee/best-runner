@@ -6,7 +6,7 @@
     "declaration": true,
     "jsx": "react",
     "esModuleInterop": true,
-    "outDir": "./build",
+    "noEmit": true,
     "strict": true,
     "resolveJsonModule": true
   },
