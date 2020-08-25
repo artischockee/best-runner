@@ -15,6 +15,11 @@ export default function IndexPage() {
       `}
       fluid="md"
     >
+      <Row>
+        <Col>
+          <h1>Your training records</h1>
+        </Col>
+      </Row>
       <Row className="justify-content-start mb-4">
         <Col xl={6} lg={6}>
           <Button
@@ -42,7 +47,6 @@ export default function IndexPage() {
       </Row>
       <Row className="justify-content-center">
         <Col>
-          <h1>Your training records</h1>
           <RecordTable />
         </Col>
       </Row>
