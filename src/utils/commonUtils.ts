@@ -40,4 +40,18 @@ export default class CommonUtils {
   static timeout(delayMs = 0) {
     return new Promise((resolve) => setTimeout(resolve, delayMs));
   }
+
+  static getPurifiedObject(object: Record<string, unknown>) {
+    return Object.entries(object).reduce((acc, entry) => {
+      if (entry[1] == null) return acc;
+
+      return { ...acc, [entry[0]]: entry[1] };
+    }, {});
+  }
+
+  static convertEmptyStringFieldsToNull<T extends Record<string, unknown>>(object: T): any {
+    return Object.entries(object).reduce((acc, [key, value]) => {
+      return { ...acc, [key]: value === "" ? null : value };
+    }, {});
+  }
 }
