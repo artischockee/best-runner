@@ -5,8 +5,8 @@ export declare namespace RecordTable {
     type?: string | null;
   }
 
-  interface TableFilterableCols {
-    type: string;
+  interface TableFilterableCols<T = string | null> extends Record<string, T> {
+    type: T;
   }
 
   type TableColsSortActions<T = "asc" | "desc"> =
