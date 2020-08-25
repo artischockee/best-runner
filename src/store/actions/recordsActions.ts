@@ -11,21 +11,24 @@ export const RecordsActionTypes = {
 };
 
 export default class RecordsActions {
-  static fetchRecords = createAsyncThunk("records/fetch", async (_, thunkAPI) => {
-    thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_PENDING });
+  static fetchRecords = createAsyncThunk(
+    "records/fetch",
+    async (params: Data.TrainingRecordGetParams | void, thunkAPI) => {
+      thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_PENDING });
 
-    try {
-      const response = await Api.getRecords();
+      try {
+        const response = await Api.getRecords(params || undefined);
 
-      thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_SUCCESS, payload: response.data });
-    } catch {
-      thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_FAILURE });
+        thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_SUCCESS, payload: response.data });
+      } catch {
+        thunkAPI.dispatch({ type: RecordsActionTypes.FETCH_FAILURE });
+      }
     }
-  });
+  );
 
   static createRecord = createAsyncThunk(
     "records/create",
-    async (data: Data.RecordPost, { rejectWithValue }) => {
+    async (data: Data.TrainingRecordPost, { rejectWithValue }) => {
       try {
         const response = await Api.postRecord(data);
 
@@ -38,7 +41,7 @@ export default class RecordsActions {
 
   static editRecord = createAsyncThunk(
     "records/edit",
-    async (payload: { recordId: number; data: Data.RecordPost }, { rejectWithValue }) => {
+    async (payload: { recordId: number; data: Data.TrainingRecordPost }, { rejectWithValue }) => {
       try {
         const response = await Api.putRecord(payload.recordId, payload.data);
 
