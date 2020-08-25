@@ -22,7 +22,7 @@ const __trainingTypes = [
 ];
 
 router.get("/training-types", (req, res) => {
-  res.json(__trainingTypes);
+  res.send(__trainingTypes);
 });
 
 module.exports = {
