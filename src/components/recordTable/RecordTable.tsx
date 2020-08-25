@@ -11,6 +11,7 @@ import RecordTableFilterGroup from "../recordTableFilterGroup";
 import RecordTableUtils from "./RecordTableUtils";
 import RecordTableConstants from "./RecordTableConstants";
 import { RecordTable as Types } from "./types";
+import CommonUtils from "../../utils/commonUtils";
 
 const sortableCellCss = css`
   :hover {
@@ -38,11 +39,7 @@ export default function RecordTable() {
 
   const getRecords = React.useCallback(
     (params = tableColsSort) => {
-      const purifiedTableColsSort = Object.entries(params).reduce((acc, entry) => {
-        if (entry[1] == null) return acc;
-
-        return { ...acc, [entry[0]]: entry[1] };
-      }, {});
+      const purifiedTableColsSort = CommonUtils.getPurifiedObject(params);
 
       dispatch(RecordsActions.fetchRecords(purifiedTableColsSort));
     },
@@ -62,7 +59,7 @@ export default function RecordTable() {
   function handleSetFilterValues(values: Types.TableFilterableCols) {
     _dispatch({
       type: "SET_FILTER",
-      payload: values,
+      payload: CommonUtils.convertEmptyStringFieldsToNull(values),
     });
   }
 
