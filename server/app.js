@@ -9,13 +9,21 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
-app.get("/", (req, res) => {
+const apiRouter = express.Router();
+
+apiRouter.use((req, res, next) => {
+  if (req.get("Referer") == null) return res.redirect("/");
+  next();
+});
+apiRouter.use("/records", recordsRouter);
+apiRouter.use("/dictionaries", dictionariesRouter);
+
+app.use("/api", apiRouter);
+
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
-
-app.use(express.static(__dirname + "/"));
-app.use("/api/records", recordsRouter);
-app.use("/api/dictionaries", dictionariesRouter);
 
 app.listen(port);
