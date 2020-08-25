@@ -2,9 +2,11 @@
   "name": "best-runner",
   "version": "0.1.0",
   "private": true,
+  "main": "build/server/app.js",
   "description": "Demo web application for athlete activities tracking",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "start": "node build/server/app.js",
+    "start:client": "webpack-dev-server --config webpack.dev.js",
     "start:server": "nodemon server/app.js",
     "build": "webpack --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
