@@ -2,8 +2,8 @@ import { Data } from "../../types/data";
 import http from "./apiConfig";
 
 export default class Api {
-  static getRecords() {
-    return http.get("records");
+  static getRecords(params?: Data.TrainingRecordGetParams) {
+    return http.get("records", { params });
   }
 
   static postRecord(data: Data.TrainingRecordPost) {
