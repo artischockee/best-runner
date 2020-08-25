@@ -8,7 +8,8 @@ import { Redux } from "../../store/types";
 import RecordRow, { Fields as RecordRowFields } from "../recordRow/RecordRow";
 import RecordTableUtils from "./RecordTableUtils";
 import RecordTableConstants from "./RecordTableConstants";
-import { RecordTable as Types } from './types';
+import { RecordTable as Types } from "./types";
+import { ReactComponent as SVGTriangle } from "../../static/images/triangle.svg";
 
 const sortableCellCss = css`
   :hover {
@@ -17,11 +18,12 @@ const sortableCellCss = css`
   }
 `;
 
-const sortLabelCss = css`
-  font-size: 0.75em;
-  font-weight: normal;
-  color: #484848;
-  vertical-align: top;
+const sortIconCss = css`
+  margin-left: 0.5em;
+  width: 0.85em;
+  height: 0.85em;
+  fill: #808080;
+  transition: transform 150ms ease-out;
 `;
 
 export default function RecordTable() {
@@ -75,19 +77,31 @@ export default function RecordTable() {
     });
   }
 
+  function renderSortableHeadCell(colName: keyof Types.TableColsSortState, title: string) {
+    return (
+      <th css={sortableCellCss} onClick={() => handleSwitchColSortOrder(colName)}>
+        {title}
+        {tableColsSort[colName] != null && (
+          <SVGTriangle
+            css={css`
+              ${sortIconCss};
+              transform: ${tableColsSort[colName] === "desc" ? "rotateX(180deg)" : "none"};
+            `}
+          />
+        )}
+      </th>
+    );
+  }
+
   return (
     <React.Fragment>
       <Table responsive hover>
         <thead>
           <tr>
             <th>#</th>
-            <th css={sortableCellCss} onClick={() => handleSwitchColSortOrder("date")}>
-              Date <span css={sortLabelCss}>{tableColsSort.date}</span>
-            </th>
+            {renderSortableHeadCell("date", "Date")}
             <th>Training type</th>
-            <th css={sortableCellCss} onClick={() => handleSwitchColSortOrder("mileage")}>
-              Mileage <span css={sortLabelCss}>{tableColsSort.mileage}</span>
-            </th>
+            {renderSortableHeadCell("mileage", "Mileage")}
             <th>Actions</th>
           </tr>
         </thead>
