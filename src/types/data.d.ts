@@ -4,7 +4,7 @@ export declare namespace Data {
   interface TrainingRecord {
     id: number;
     date: string; // ISO
-    type: string; // identifier
+    type: number | string; // id
     mileage: number;
     comments?: string;
   }

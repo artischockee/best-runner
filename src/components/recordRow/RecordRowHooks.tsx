@@ -7,11 +7,11 @@ import DictionariesUtils from "../../utils/dictionariesUtils";
 export default class RecordRowHooks {
   static useTrainingTypes(): [
     TrainingTypesReducerState,
-    ((id: number) => string | null)
+    ((id: number | string) => string | null)
   ] {
     const trainingTypes = useSelector(TrainingTypesSelectors.trainingTypes);
 
-    const getTypeLabelById = React.useCallback((id: number) => {
+    const getTypeLabelById = React.useCallback((id: number | string) => {
       const typeEntry = trainingTypes.data.find((tt) => tt.id === id);
       if (typeEntry == null) return null;
 

@@ -10,9 +10,9 @@ interface Props {
   id: number;
   index: number;
   date: string; // ISO format
-  type: number;
+  type: number | string;
   mileage: number;
-  onChange(id: number, date: Fields): Promise<() => unknown>;
+  onChange(id: number, date: Fields): Promise<unknown>;
   onDelete(id: number): void;
 }
 
@@ -31,7 +31,8 @@ export default function RecordRow(props: Props) {
   function handleSaveChanges(data: Fields) {
     props.onChange(props.id, data).then((fetchRecords) => {
       setIsEditing(false);
-      fetchRecords();
+
+      if (typeof fetchRecords === "function") fetchRecords();
     });
   }
 
