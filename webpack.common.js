@@ -1,3 +1,4 @@
+const path = require("path");
 const WebpackManifestPlugin = require("webpack-manifest-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -38,6 +39,9 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif)$/i,
         loader: "file-loader",
+        options: {
+          outputPath: path.join("assets", "images"),
+        },
       },
       {
         test: /\.svg$/i,
@@ -54,12 +58,20 @@ module.exports = {
               },
             },
           },
-          { loader: "file-loader" },
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: path.join("assets", "images"),
+            },
+          },
         ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
         loader: "file-loader",
+        options: {
+          outputPath: path.join("assets", "fonts"),
+        },
       },
     ],
   },
