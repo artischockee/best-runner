@@ -38,7 +38,39 @@ let __records = [
 ];
 
 router.get("/", (req, res) => {
-  res.json(__records);
+  if (Object.entries(req.query).length === 0) {
+    return res.json(__records);
+  }
+
+  const sortedRecords = Array.from(__records).sort((a, b) => {
+    if (req.query.date != null) {
+      const dateLeftVariable = req.query.date === "desc" ? new Date(b.date) : new Date(a.date);
+      const dateRightVariable = req.query.date === "desc" ? new Date(a.date) : new Date(b.date);
+
+      const dateResult = dateLeftVariable - dateRightVariable;
+
+      if (dateResult !== 0) return dateResult;
+    }
+
+    // If 2 compared dates are equal (dateResult will be 0),
+    // then we should proceed to mileage comparison.
+
+    if (req.query.mileage != null) {
+      const mileageLeftVariable = req.query.mileage === "desc" ? b.mileage : a.mileage;
+      const mileageRightVariable = req.query.mileage === "desc" ? a.mileage : b.mileage;
+
+      const mileageResult = mileageLeftVariable - mileageRightVariable;
+
+      if (mileageResult !== 0) return mileageResult;
+    }
+
+    // If 2 compared mileages are equal (mileageResult will be 0),
+    // then we should return 0 because these 2 entries are equal.
+
+    return 0;
+  });
+
+  res.json(sortedRecords);
 });
 
 router.post("/", (req, res) => {
