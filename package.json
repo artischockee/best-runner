@@ -2,10 +2,10 @@
   "name": "best-runner",
   "version": "0.1.0",
   "private": true,
-  "main": "build/server/app.js",
+  "main": "build/app.js",
   "description": "Demo web application for athlete activities tracking",
   "scripts": {
-    "start": "node build/server/app.js",
+    "start": "node build/app.js",
     "start:client": "webpack-dev-server --config webpack.dev.js",
     "start:server": "nodemon server/app.js",
     "build": "webpack --config webpack.prod.js",
