@@ -10,19 +10,82 @@ import { Redux } from "../../store/types";
 import { ReactComponent as SVGPlus } from "../../static/images/plus.svg";
 import { Fields as RecordRowFields } from "../../components/recordRow/RecordRow";
 
+const sortableCellCss = css`
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+const sortLabelCss = css`
+  font-size: 0.75em;
+  font-weight: normal;
+  color: #484848;
+  vertical-align: top;
+`;
+
+interface TableColsSortState<T = "asc" | "desc" | null> {
+  date: T;
+  mileage: T;
+}
+
+type TableColsSortActions<T = "asc" | "desc"> = {
+  type: "SWITCH_ORDER";
+  colName: keyof TableColsSortState;
+  payload: T;
+};
+
+const tableColsSortInitialState = {
+  date: null,
+  mileage: null,
+};
+
+function tableColsSortReducer(
+  state: TableColsSortState,
+  action: TableColsSortActions
+): TableColsSortState {
+  switch (action.type) {
+    case "SWITCH_ORDER":
+      return {
+        ...tableColsSortInitialState,
+        [action.colName]: action.payload,
+      };
+    default:
+      throw new Error();
+  }
+}
+
 export default function IndexPage() {
   const dispatch: Redux.Dispatch = useDispatch();
   const records = useSelector(RecordsSelectors.records);
 
   const [isAddRecordFormCollapseOpen, setIsAddRecordFormCollapseOpen] = React.useState(false);
+  const [tableColsSort, _dispatch] = React.useReducer(
+    tableColsSortReducer,
+    tableColsSortInitialState
+  );
 
   const getRecords = React.useCallback(() => {
-    dispatch(RecordsActions.fetchRecords());
-  }, []);
+    const purifiedTableColsSort = Object.entries(tableColsSort).reduce((acc, entry) => {
+      if (entry[1] == null) return acc;
+
+      return { ...acc, [entry[0]]: entry[1] };
+    }, {});
+
+    dispatch(RecordsActions.fetchRecords(purifiedTableColsSort));
+  }, [tableColsSort]);
 
   React.useEffect(() => {
     getRecords();
   }, [getRecords]);
+
+  function handleSwitchColSortOrder(colName: keyof TableColsSortState) {
+    _dispatch({
+      type: "SWITCH_ORDER",
+      colName,
+      payload: tableColsSort[colName] === "asc" ? "desc" : "asc",
+    });
+  }
 
   function handleChangeRecord(recordId: number, recordData: RecordRowFields) {
     return new Promise((resolve, reject) => {
@@ -32,7 +95,7 @@ export default function IndexPage() {
           return window.alert("Error while editing the record");
         }
 
-        resolve(() => dispatch(RecordsActions.fetchRecords()));
+        resolve(() => getRecords());
       });
     });
   }
@@ -42,7 +105,7 @@ export default function IndexPage() {
       if (result.type.endsWith("rejected")) {
         return window.alert("Error while deleting the record");
       }
-      dispatch(RecordsActions.fetchRecords());
+      getRecords();
     });
   }
 
@@ -63,7 +126,7 @@ export default function IndexPage() {
           >
             <SVGPlus
               css={css`
-                margin-right: .5em;
+                margin-right: 0.5em;
                 fill: currentColor;
               `}
             />
@@ -85,9 +148,13 @@ export default function IndexPage() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Date</th>
+                <th css={sortableCellCss} onClick={() => handleSwitchColSortOrder("date")}>
+                  Date <span css={sortLabelCss}>{tableColsSort.date}</span>
+                </th>
                 <th>Training type</th>
-                <th>Mileage</th>
+                <th css={sortableCellCss} onClick={() => handleSwitchColSortOrder("mileage")}>
+                  Mileage <span css={sortLabelCss}>{tableColsSort.mileage}</span>
+                </th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -112,7 +179,7 @@ export default function IndexPage() {
               {records.isError && (
                 <React.Fragment>
                   <p>Error while fetching the data</p>
-                  <Button onClick={getRecords}>Retry</Button>
+                  <Button onClick={() => getRecords()}>Retry</Button>
                 </React.Fragment>
               )}
             </div>
