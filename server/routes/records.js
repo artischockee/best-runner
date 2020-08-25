@@ -42,7 +42,16 @@ router.get("/", (req, res) => {
     return res.json(__records);
   }
 
-  const sortedRecords = Array.from(__records).sort((a, b) => {
+  let records = Array.from(__records);
+
+  if (
+    req.query.type != null &&
+    __trainingTypes.find((tt) => tt.id === Number(req.query.type)) != null
+  ) {
+    records = records.filter((record) => record.type === Number(req.query.type));
+  }
+
+  records.sort((a, b) => {
     if (req.query.date != null) {
       const dateLeftVariable = req.query.date === "desc" ? new Date(b.date) : new Date(a.date);
       const dateRightVariable = req.query.date === "desc" ? new Date(a.date) : new Date(b.date);
@@ -70,7 +79,7 @@ router.get("/", (req, res) => {
     return 0;
   });
 
-  res.json(sortedRecords);
+  res.json(records);
 });
 
 router.post("/", (req, res) => {
