@@ -10,7 +10,18 @@ export default class RecordTableUtils {
       case "SWITCH_ORDER":
         return {
           ...RecordTableConstants.tableColsSortInitialState,
+          type: state.type,
           [action.colName]: action.payload,
+        };
+      case "SET_FILTER":
+        return {
+          ...state,
+          ...action.payload,
+        };
+      case "RESET_FILTER":
+        return {
+          ...state,
+          type: null,
         };
       default:
         throw new Error();

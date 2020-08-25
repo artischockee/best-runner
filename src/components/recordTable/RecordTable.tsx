@@ -5,11 +5,12 @@ import { Button, Spinner, Table } from "reactstrap";
 import RecordsActions from "../../store/actions/recordsActions";
 import RecordsSelectors from "../../store/selectors/recordsSelectors";
 import { Redux } from "../../store/types";
+import { ReactComponent as SVGTriangle } from "../../static/images/triangle.svg";
 import RecordRow, { Fields as RecordRowFields } from "../recordRow/RecordRow";
+import RecordTableFilterGroup from "../recordTableFilterGroup";
 import RecordTableUtils from "./RecordTableUtils";
 import RecordTableConstants from "./RecordTableConstants";
 import { RecordTable as Types } from "./types";
-import { ReactComponent as SVGTriangle } from "../../static/images/triangle.svg";
 
 const sortableCellCss = css`
   :hover {
@@ -35,15 +36,18 @@ export default function RecordTable() {
     RecordTableConstants.tableColsSortInitialState
   );
 
-  const getRecords = React.useCallback(() => {
-    const purifiedTableColsSort = Object.entries(tableColsSort).reduce((acc, entry) => {
-      if (entry[1] == null) return acc;
+  const getRecords = React.useCallback(
+    (params = tableColsSort) => {
+      const purifiedTableColsSort = Object.entries(params).reduce((acc, entry) => {
+        if (entry[1] == null) return acc;
 
-      return { ...acc, [entry[0]]: entry[1] };
-    }, {});
+        return { ...acc, [entry[0]]: entry[1] };
+      }, {});
 
-    dispatch(RecordsActions.fetchRecords(purifiedTableColsSort));
-  }, [tableColsSort]);
+      dispatch(RecordsActions.fetchRecords(purifiedTableColsSort));
+    },
+    [tableColsSort]
+  );
 
   React.useEffect(getRecords, [getRecords]);
 
@@ -53,6 +57,17 @@ export default function RecordTable() {
       colName,
       payload: tableColsSort[colName] === "asc" ? "desc" : "asc",
     });
+  }
+
+  function handleSetFilterValues(values: Types.TableFilterableCols) {
+    _dispatch({
+      type: "SET_FILTER",
+      payload: values,
+    });
+  }
+
+  function handleResetFilterValues() {
+    _dispatch({ type: "RESET_FILTER" });
   }
 
   function handleChangeRecord(recordId: number, recordData: RecordRowFields) {
@@ -95,6 +110,7 @@ export default function RecordTable() {
 
   return (
     <React.Fragment>
+      <RecordTableFilterGroup onChange={handleSetFilterValues} onReset={handleResetFilterValues} />
       <Table responsive hover>
         <thead>
           <tr>
