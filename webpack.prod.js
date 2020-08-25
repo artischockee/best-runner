@@ -20,7 +20,7 @@ module.exports = merge(common, {
       chunkFilename: "assets/css/[id].[hash].chunk.css",
     }),
     new CopyWebpackPlugin({
-      patterns: ["server"],
+      patterns: ["server", { from: path.join("public", "icons"), to: "icons" }],
     }),
   ],
   module: {
