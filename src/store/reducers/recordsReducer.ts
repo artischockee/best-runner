@@ -3,7 +3,7 @@ import { Data } from "../../types/data";
 import { RecordsActionTypes } from "../actions/recordsActions";
 
 const initialState = {
-  data: [] as Data.Record[],
+  data: [] as Data.TrainingRecord[],
   isLoading: false,
   isError: false,
 };

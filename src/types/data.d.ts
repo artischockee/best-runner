@@ -1,5 +1,7 @@
+import { Fields as RecordRowFields } from "../components/recordRow/RecordRow";
+
 export declare namespace Data {
-  interface Record {
+  interface TrainingRecord {
     id: number;
     date: string; // ISO
     type: string; // identifier
@@ -7,7 +9,9 @@ export declare namespace Data {
     comments?: string;
   }
 
-  type RecordPost = Omit<Record, "id">;
+  type TrainingRecordGetParams = Partial<Record<keyof RecordRowFields, "asc" | "desc">>;
+
+  type TrainingRecordPost = Omit<TrainingRecord, "id">;
 
   interface TrainingType {
     id: number;

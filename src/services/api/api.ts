@@ -6,11 +6,11 @@ export default class Api {
     return http.get("records");
   }
 
-  static postRecord(data: Data.RecordPost) {
+  static postRecord(data: Data.TrainingRecordPost) {
     return http.post("records", data);
   }
 
-  static putRecord(recordId: number, data: Data.RecordPost) {
+  static putRecord(recordId: number, data: Data.TrainingRecordPost) {
     return http.put(`records/${recordId}`, data);
   }
 
