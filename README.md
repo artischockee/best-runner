@@ -15,6 +15,16 @@ git clone git@github.com:artischockee/best-runner.git
 cd best-runner
 ```
 
+### The fastest way
+
+This will build a production version of the app:
+
+```
+docker-compose up
+```
+
+### The dumbest way
+
 Install all dependencies
 
 ```
@@ -33,6 +43,8 @@ Then run 2 processes:
 yarn start:client
 yarn start:server
 ```
+
+These commands will operate a development version of the app.
 
 ## Technology stack
 
