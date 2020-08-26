@@ -23,6 +23,8 @@ This will build a production version of the app:
 docker-compose up
 ```
 
+After composing, open [http://localhost:5000/](http://localhost:5000/) in your browser in order to view the application.
+
 ### The dumbest way
 
 Install all dependencies
